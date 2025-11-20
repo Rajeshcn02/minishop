@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: body">
+<body>
+<h3>Admin – Products</h3>
+<a th:href="@{/admin/products/new}">+ Add Product</a>
+
+<div th:each="p : ${products}" class="card">
+  <b th:text="${p.name}"></b>
+  <div>₹<span th:text="${p.price}"></span> | Stock: <span th:text="${p.stock}"></span></div>
+
+  <a th:href="@{/admin/products/{id}/edit(id=${p.id})}">Edit</a>
+
+  <form th:action="@{/admin/products/{id}/delete(id=${p.id})}" method="post" style="display:inline">
+    <button type="submit">Delete</button>
+  </form>
+</div>
+</body>
+</html>

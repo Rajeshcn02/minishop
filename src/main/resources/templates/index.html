@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: body">
+<body>
+<h3>Products</h3>
+
+<div th:each="p : ${products}" class="card">
+  <h4><a th:href="@{/products/{id}(id=${p.id})}" th:text="${p.name}"></a></h4>
+  <p th:text="${p.description}"></p>
+  <p>₹<span th:text="${p.price}"></span> | Stock: <span th:text="${p.stock}"></span></p>
+
+  <form th:action="@{/cart/add/{id}(id=${p.id})}" method="post">
+    <button type="submit">Add to Cart</button>
+  </form>
+</div>
+</body>
+</html>

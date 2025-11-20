@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: body">
+<body>
+<h3>Your Cart</h3>
+
+<p th:if="${empty}">Cart is empty.</p>
+
+<div th:each="row : ${items}" class="card">
+  <div th:with="p=${row[0]}, qty=${row[1]}">
+    <b th:text="${p.name}"></b>
+    <span> x <span th:text="${qty}"></span></span>
+    <span> | ₹<span th:text="${p.price}"></span></span>
+
+    <form th:action="@{/cart/remove/{id}(id=${p.id})}" method="post" style="display:inline">
+      <button type="submit">Remove</button>
+    </form>
+  </div>
+</div>
+
+<form th:if="${!empty}" th:action="@{/checkout}" method="post">
+  <button type="submit">Checkout (Mock)</button>
+</form>
+</body>
+</html>

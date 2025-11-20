@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>MiniShop</title>
+  <style>
+    body { font-family: Arial; margin: 20px; }
+    header { display:flex; gap:12px; align-items:center; }
+    a { text-decoration:none; }
+    .card { border:1px solid #ddd; padding:12px; margin:10px 0; border-radius:8px; }
+    button { padding:6px 10px; }
+  </style>
+</head>
+<body>
+<header>
+  <h2><a th:href="@{/}">MiniShop</a></h2>
+  <a th:href="@{/cart}">Cart</a>
+  <a th:href="@{/orders}">My Orders</a>
+  <a th:href="@{/admin/products}">Admin</a>
+  <span th:if="${#authorization.expression('isAuthenticated()')}">
+    Logged in as <b th:text="${#authentication.name}"></b> |
+    <a th:href="@{/logout}">Logout</a>
+  </span>
+  <span th:unless="${#authorization.expression('isAuthenticated()')}">
+    <a th:href="@{/login}">Login</a>
+  </span>
+</header>
+<hr/>
+<div th:replace="~{::body}"></div>
+</body>
+</html>

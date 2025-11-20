@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: body">
+<body>
+<h3>My Orders</h3>
+
+<div th:each="o : ${orders}" class="card">
+  <b>Order #<span th:text="${o.id}"></span></b>
+  <div><small th:text="${o.createdAt}"></small></div>
+  <ul>
+    <li th:each="i : ${o.items}">
+      <span th:text="${i.productName}"></span>
+      — ₹<span th:text="${i.price}"></span>
+      x <span th:text="${i.quantity}"></span>
+    </li>
+  </ul>
+</div>
+</body>
+</html>
