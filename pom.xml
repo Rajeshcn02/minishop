@@ -8,8 +8,10 @@
   <version>1.0.0</version>
   <name>MiniShop</name>
 
+  <!-- ✅ Force Java 17 compilation -->
   <properties>
     <java.version>17</java.version>
+    <maven.compiler.release>17</maven.compiler.release>
     <spring-boot.version>3.2.5</spring-boot.version>
   </properties>
 
@@ -61,6 +63,16 @@
 
   <build>
     <plugins>
+      <!-- ✅ Explicit compiler plugin to avoid Java 8 target in CI -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>${maven.compiler.release}</release>
+        </configuration>
+      </plugin>
+
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
